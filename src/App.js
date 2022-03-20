@@ -3,8 +3,11 @@ import Login from './pages/Login';
 import Cards from './pages/Cards';
 import Profile from './pages/Profile';
 import { Route, Router } from 'wouter';
+import connect from './utils/polkadot'
 
-const App = () => {
+const App = async () => {
+  const api = await connect();
+  console.log(api.genesisHash.toHex());
   return (
     <Router>
       <Route path='/' component={Cards}/>
