@@ -1,6 +1,10 @@
+import MyCollection from "./MyCollection";
+
 const Profile = () => {
     return(
-        <div>Profile</div>
+        <div>
+            <MyCollection/>
+        </div>
     )
 };
 

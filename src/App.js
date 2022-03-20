@@ -4,10 +4,19 @@ import Cards from './pages/Cards';
 import Profile from './pages/Profile';
 import { Route, Router } from 'wouter';
 import connect from './utils/polkadot'
+import { useEffect } from 'react';
+import 'antd/dist/antd.css';
 
-const App = async () => {
-  const api = await connect();
-  console.log(api.genesisHash.toHex());
+const App = () => {
+  const create_api = async () => {
+    const api = await connect();
+    console.log(api.genesisHash.toHex());
+  };
+
+  useEffect(() => {
+    create_api();
+  });
+ 
   return (
     <Router>
       <Route path='/' component={Cards}/>
