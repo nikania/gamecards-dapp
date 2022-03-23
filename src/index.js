@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { PolkadotProvider } from './components/PolkadotProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+     <PolkadotProvider>
+        <App />
+     </PolkadotProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
