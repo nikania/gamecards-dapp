@@ -1,25 +1,32 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import usePolkadot from "../hooks/usePolkadot";
 
 const Cards = () => {
-    // const { polkadotState, dispatch } = useContext(store);
-    // const { api, injector} = polkadotState;
+    const { previousCardId, cardRegistry, console_info } = usePolkadot();
+    const [cardId, setCardId] = useState(0);
+    const [cards, setCards] = useState([]);
 
-    // console.log(api.genesisHash.toHex());
-    // console.log(api.consts.babe.epochDuration.toNumber());
-    // let query = api.query;
-    // let card_id = api.query.gamecards.previousCardId();
-    // let cards = [];
-    // for (let i = 0; i >= 0; i--) {
-    //     cards = [...cards, api.query.gamecards.cardRegistry(i)];
-    // }
+    useEffect(
+    () => {
+        (async () => {
+            const id = await previousCardId();
+            setCardId(id);
+            console.log("🚀 ~ file: Cards.jsx ~ line 16 ~ previousCardId ~ id", id)
+            console.log("🚀 ~ file: Cards.jsx ~ line 16 ~ previousCardId ~ id", id)
+            for (let i = previousCardId; i > 0; i--) {
+                cardRegistry(i).then(card => {
+                    setCards([...cards, card]);
+                });
+            }
+        })();
+    }, [previousCardId, cardRegistry]);
 
     return(
         <div>
             <div>Cards</div>
-            {/* <p>{api.consts.babe.epochDuration.toNumber()}</p>
-            <p>{card_id}</p>
-            <p>{api.query}</p>
-           <p>{cards}</p> */}
+            {cards.map((card) =>{
+                <p>{card}</p>
+            })}
         </div>
        
     )

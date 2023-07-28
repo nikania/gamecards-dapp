@@ -43,8 +43,8 @@ const App = () => {
   useEffect(
     () => {
       if (isAPIReady){
-        console.log("ready");
-        console_info();
+        // console.log("ready");
+      //  console_info();
       }
     },
     [isAPIReady],
